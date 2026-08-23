@@ -4,6 +4,35 @@ local UserInputService = game:GetService("UserInputService")
 local workspace = game:GetService("Workspace")
 
 local player = Players.LocalPlayer
+
+-- ==========================================
+-- [0파트] 화이트리스트 설정
+-- ==========================================
+-- 여기에 허용할 플레이어의 닉네임(Name)이나 UserID를 적어주세요.
+local whitelist = {
+    "v_cxvz0",
+}
+
+local function isWhitelisted(plr)
+    -- 화이트리스트가 비어있거나(전체 허용), 목록에 포함된 경우 true 반환
+    if #whitelist == 0 then return true end
+    
+    for _, allowed in ipairs(whitelist) do
+        if type(allowed) == "string" and plr.Name == allowed then
+            return true
+        elseif type(allowed) == "number" and plr.UserId == allowed then
+            return true
+        end
+    end
+    return false
+end
+
+-- 화이트리스트에 없는 플레이어는 스크립트 실행 중지
+if not isWhitelisted(player) then
+    warn("[System] 이 스크립트를 사용할 수 있는 권한이 없습니다.")
+    return
+end
+
 local playerGui = player:WaitForChild("PlayerGui")
 local Terrain = workspace.Terrain
 
