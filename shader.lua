@@ -12,7 +12,6 @@ local player = Players.LocalPlayer
 local whitelist = {
     "v_cxvz0",
 }
-
 local function isWhitelisted(plr)
     -- 화이트리스트가 비어있거나(전체 허용), 목록에 포함된 경우 true 반환
     if #whitelist == 0 then return true end
